@@ -1,0 +1,55 @@
+{% extends 'base/base_generic.html' %}
+
+{% block title %}
+  <title>Home |Upload Statement</title>
+{% endblock %}
+
+{% block content %}
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Upload Your Statement Here</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+      <div class="btn-group me-2"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">New Upload</div>
+    <div class="card-body">
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+          {% if field.name == 'completed' %}
+            <div class="form-group mb-3">
+              <label class="form-label" for="{{ field.auto_id }}">{{ field.label }}</label>
+              {{ field }}
+              {% if field.errors %}
+                <div id="inputError" class="form-text">
+                  <small class="error">{{ field.errors|striptags }}</small>
+                </div>
+              {% endif %}
+            </div>
+          {% else %}
+            <div class="form-group mb-3">
+              <label class="form-label" for="{{ field.auto_id }}">{{ field.label }}</label>
+              {{ field }}
+              {% if field.errors %}
+                <div id="inputError" class="form-text">
+                  <small class="error">{{ field.errors|striptags }}</small>
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+        <div class="card-footer">
+          <div class="d-flex flex-row justify-content-between">
+            <div>
+              <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+            <div>
+              <a href="{% url 'statements' %}" class="btn btn-outline btn-danger">Cancel</a>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}
