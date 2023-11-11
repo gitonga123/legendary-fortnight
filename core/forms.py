@@ -13,4 +13,5 @@ class UploadFileForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'file_uploaded': forms.FileInput(attrs={'class': 'form-control custom-file-input'}),
+            'year': forms.NumberInput(attrs={'class': 'form-control custom-file-input'}),
         }
